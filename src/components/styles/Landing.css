@@ -1,0 +1,215 @@
+.landing-section {
+  width: 100%;
+  max-width: var(--cMaxWidth);
+  margin: auto;
+  position: relative;
+  height: var(--vh);
+  display: flex;
+  align-items: center;
+}
+
+.landing-container {
+  width: var(--cWidth);
+  margin: auto;
+  height: 100%;
+  position: relative;
+  max-width: var(--cMaxWidth);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ---------- intro tag ---------- */
+.landing-intro {
+  position: relative;
+  z-index: 9;
+  margin-bottom: 18px;
+}
+
+.landing-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: 500;
+  color: var(--accent);
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border: 1px solid rgba(180, 144, 255, 0.3);
+  border-radius: 40px;
+  background: rgba(180, 144, 255, 0.06);
+  font-family: "DM Sans", sans-serif;
+}
+.landing-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent3);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* ---------- big name ---------- */
+.landing-name {
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  font-size: clamp(52px, 9vw, 130px);
+  line-height: 0.9;
+  letter-spacing: -2px;
+  margin: 12px 0 0;
+  text-transform: uppercase;
+  color: #e8e3ef;
+  perspective: 600px;
+  overflow: hidden;
+}
+
+.landing-name-line {
+  overflow: hidden;
+  display: block;
+}
+
+.landing-name-char {
+  display: inline-block;
+  opacity: 0;
+}
+
+.landing-name-accent {
+  color: var(--accent);
+  display: block;
+}
+
+/* ---------- info strip ---------- */
+.landing-info-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: 60px;
+  margin-top: 40px;
+  z-index: 9;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.landing-info-line {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0;
+}
+.landing-info-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+.landing-info-value {
+  font-size: 15px;
+  color: #c8c0d4;
+  font-weight: 400;
+}
+
+/* ---------- role badge ---------- */
+.landing-role-badge {
+  position: absolute;
+  right: 0;
+  bottom: 12%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  z-index: 9;
+  opacity: 0;
+}
+
+.role-badge-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.role-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 40px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+  color: #c8c0d4;
+  font-family: "DM Sans", sans-serif;
+}
+.role-pill-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent);
+}
+
+/* ---------- scroll hint ---------- */
+.landing-scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.35;
+  z-index: 9;
+  animation: scrollFade 2s 2s forwards;
+}
+@keyframes scrollFade {
+  to { opacity: 0.35; }
+}
+.scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: scrollLine 1.8s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+.scroll-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ---------- background grid ---------- */
+.landing-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(180, 144, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180, 144, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .landing-role-badge { display: none; }
+  .landing-info-strip { gap: 30px; margin-top: 30px; }
+}
+
+@media screen and (min-width: 1025px) {
+  .landing-name { font-size: clamp(90px, 10vw, 140px); }
+  .landing-info-strip { margin-top: 50px; }
+}

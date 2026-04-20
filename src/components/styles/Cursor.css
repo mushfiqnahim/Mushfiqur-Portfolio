@@ -1,0 +1,31 @@
+.cursor-main {
+  --size: 0px;
+  position: fixed;
+  top: calc(var(--size) / -2);
+  left: calc(var(--size) / -2);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50px;
+  pointer-events: none;
+  z-index: 999999;
+  background-color: #c4a4ff;
+  box-shadow: 0px 0px 25px 0px rgba(180, 144, 255, 0.7);
+  mix-blend-mode: difference;
+  transition: top 0.3s ease-out, left 0.3s ease-out,
+    width 0.3s ease-out, height 0.3s ease-out;
+}
+.cursor-icons {
+  top: 10px !important;
+  left: 10px !important;
+  height: calc(var(--cursorH) - 20px) !important;
+  transition: all 0.5s ease-out, height 0.5s ease-in-out !important;
+}
+.cursor-disable {
+  --size: 0px !important;
+}
+
+@media only screen and (min-width: 600px) {
+  .cursor-main {
+    --size: 45px;
+  }
+}
