@@ -44,12 +44,13 @@
 }
 
 .resume-button {
-  position: absolute;
-  z-index: 99;
+  position: fixed;
+  z-index: 9999;
   display: flex;
+  align-items: center;
   gap: 6px;
-  bottom: 44px;
-  right: 0;
+  bottom: 32px;
+  right: 20px;
   width: auto;
   text-wrap: nowrap;
   letter-spacing: 4px;
@@ -59,9 +60,9 @@
   color: var(--text-dim);
   cursor: pointer;
   transition: color 0.4s;
-  transform-origin: left bottom;
-  transform: translateX(100%) rotateZ(-90deg);
   font-family: "DM Sans", sans-serif;
+  transform-origin: right bottom;
+  transform: rotateZ(-90deg) translateX(50%);
 }
 .resume-button:hover {
   color: var(--accent);
@@ -79,8 +80,10 @@
 @media only screen and (min-width: 768px) {
   .resume-button {
     transform: none;
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 14px;
+    bottom: 28px;
+    right: 24px;
   }
-  .resume-button svg { font-size: 20px; }
+  .resume-button svg { font-size: 18px; }
 }
