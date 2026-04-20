@@ -14,6 +14,7 @@ import Cursor from "./Cursor";
 import Landing from "./Landing";
 import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
+import VideoShowcase from "./VideoShowcase";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 
@@ -62,6 +63,7 @@ const MainContainer = (_props: PropsWithChildren) => {
               <About />
               <WhatIDo />
               <Career />
+              <VideoShowcase />
               <Work />
               {isDesktop && (
                 <Suspense fallback={<div style={{ height: "100vh" }} />}>
