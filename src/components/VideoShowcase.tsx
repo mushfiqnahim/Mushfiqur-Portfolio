@@ -133,7 +133,7 @@ const VideoShowcase = () => {
             <video
               ref={videoRef}
               className="vs-video"
-              src="/profile-video.mp4"
+              src="/showcase-video.mp4"
               loop
               playsInline
               onPlay={() => setPlaying(true)}

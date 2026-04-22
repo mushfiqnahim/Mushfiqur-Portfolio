@@ -16,7 +16,16 @@
   max-width: var(--cMaxWidth);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.landing-content-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 /* ---------- intro tag ---------- */
@@ -41,6 +50,7 @@
   background: rgba(180, 144, 255, 0.06);
   font-family: "DM Sans", sans-serif;
 }
+
 .landing-tag-dot {
   width: 6px;
   height: 6px;
@@ -48,16 +58,26 @@
   background-color: var(--accent3);
   animation: pulse 2s infinite;
 }
+
 @keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
 }
 
 /* ---------- big name ---------- */
 .landing-name {
   font-family: "Syne", sans-serif;
   font-weight: 800;
-  font-size: clamp(52px, 9vw, 130px);
+  font-size: clamp(42px, 7vw, 100px);
   line-height: 0.9;
   letter-spacing: -2px;
   margin: 12px 0 0;
@@ -65,6 +85,8 @@
   color: #e8e3ef;
   perspective: 600px;
   overflow: hidden;
+  position: relative;
+  z-index: 20;
 }
 
 .landing-name-line {
@@ -90,6 +112,7 @@
   margin-top: 40px;
   z-index: 9;
   position: relative;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -99,6 +122,7 @@
   gap: 4px;
   opacity: 0;
 }
+
 .landing-info-label {
   font-size: 11px;
   letter-spacing: 2px;
@@ -106,6 +130,7 @@
   color: var(--text-dim);
   font-weight: 500;
 }
+
 .landing-info-value {
   font-size: 15px;
   color: #c8c0d4;
@@ -114,12 +139,9 @@
 
 /* ---------- role badge ---------- */
 .landing-role-badge {
-  position: absolute;
-  right: 0;
-  bottom: 12%;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
+  margin-top: 32px;
   gap: 12px;
   z-index: 9;
   opacity: 0;
@@ -127,9 +149,10 @@
 
 .role-badge-inner {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
 }
 
 .role-pill {
@@ -142,12 +165,13 @@
   padding: 8px 18px;
   border-radius: 40px;
   border: 1px solid var(--border);
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(8px);
   white-space: nowrap;
   color: #c8c0d4;
   font-family: "DM Sans", sans-serif;
 }
+
 .role-pill-dot {
   width: 5px;
   height: 5px;
@@ -169,21 +193,42 @@
   z-index: 9;
   animation: scrollFade 2s 2s forwards;
 }
+
 @keyframes scrollFade {
-  to { opacity: 0.35; }
+  to {
+    opacity: 0.35;
+  }
 }
+
 .scroll-line {
   width: 1px;
   height: 50px;
   background: linear-gradient(to bottom, var(--accent), transparent);
   animation: scrollLine 1.8s ease-in-out infinite;
 }
+
 @keyframes scrollLine {
-  0% { transform: scaleY(0); transform-origin: top; }
-  50% { transform: scaleY(1); transform-origin: top; }
-  51% { transform: scaleY(1); transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+
+  51% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
 }
+
 .scroll-label {
   font-size: 10px;
   letter-spacing: 3px;
@@ -204,12 +249,40 @@
   z-index: 0;
 }
 
+@media screen and (max-width: 1024px) {
+  .landing-container {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .landing-content-text {
+    align-items: center;
+    text-align: center;
+  }
+
+  .landing-info-strip {
+    justify-content: center;
+  }
+
+  .landing-role-badge,
+  .role-badge-inner {
+    justify-content: center;
+  }
+}
+
 @media screen and (max-width: 768px) {
-  .landing-role-badge { display: none; }
-  .landing-info-strip { gap: 30px; margin-top: 30px; }
+  .landing-info-strip {
+    gap: 30px;
+    margin-top: 30px;
+  }
 }
 
 @media screen and (min-width: 1025px) {
-  .landing-name { font-size: clamp(90px, 10vw, 140px); }
-  .landing-info-strip { margin-top: 50px; }
+  .landing-name {
+    font-size: clamp(70px, 8vw, 110px);
+  }
+
+  .landing-info-strip {
+    margin-top: 50px;
+  }
 }

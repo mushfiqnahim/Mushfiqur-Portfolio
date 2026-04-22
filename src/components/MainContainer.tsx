@@ -10,7 +10,6 @@ import { useLoading } from "../context/LoadingProvider";
 import About from "./About";
 import Career from "./Career";
 import Contact from "./Contact";
-import Cursor from "./Cursor";
 import Landing from "./Landing";
 import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
@@ -20,7 +19,7 @@ import Work from "./Work";
 
 const TechStack = lazy(() => import("./TechStack"));
 
-const MainContainer = (_props: PropsWithChildren) => {
+const MainContainer = ({ children }: PropsWithChildren) => {
   const { isLoading } = useLoading();
   const [percent, setPercent] = useState(0);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024);
@@ -52,14 +51,15 @@ const MainContainer = (_props: PropsWithChildren) => {
 
       {/* Main site */}
       <main>
-        <Cursor />
         <Navbar />
         <SocialIcons />
 
         <div id="smooth-wrapper">
           <div id="smooth-content">
             <div className="container-main main-body">
-              <Landing />
+              <Landing>
+                {children}
+              </Landing>
               <About />
               <WhatIDo />
               <Career />

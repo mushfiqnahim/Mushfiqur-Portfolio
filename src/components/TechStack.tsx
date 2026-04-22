@@ -13,9 +13,10 @@ import {
 import "./styles/TechStack.css";
 
 const skills = [
-  "Python", "TensorFlow", "Keras", "PyTorch",
-  "OpenCV", "MediaPipe", "HuggingFace", "Scikit-learn",
-  "NLTK", "SQL", "Git", "NumPy",
+  "Python", "TensorFlow", "Keras", "PyTorch", "OpenCV", "MediaPipe",
+  "HuggingFace", "Scikit-learn", "NLTK", "SQL", "Git", "NumPy", "n8n", "OpenClaw", "LLMs",
+  "AI Automation", "Pandas", "FastAPI", "React", "TypeScript", "CNNs",
+  "YOLO", "NLP", "Machine Learning", "Deep Learning", "Data Mining", "REST APIs", "OPENCLAW"
 ];
 
 const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
@@ -30,54 +31,78 @@ function SphereGeo({
   r = THREE.MathUtils.randFloatSpread,
   material,
   isActive,
+  skill,
 }: {
   vec?: THREE.Vector3;
   scale: number;
   r?: typeof THREE.MathUtils.randFloatSpread;
   material: THREE.MeshPhysicalMaterial;
   isActive: boolean;
+  skill: string;
 }) {
   const api = useRef<RapierRigidBody | null>(null);
+  const textRef = useRef<THREE.Mesh>(null!);
 
-  useFrame((_state, delta) => {
-    if (!isActive || !api.current) return;
+  useFrame((state, delta) => {
+    if (!api.current) return;
+
+    // Sync text position with the physics body and face the camera
+    if (textRef.current) {
+      const pos = api.current.translation();
+      textRef.current.position.set(pos.x, pos.y, pos.z);
+      textRef.current.quaternion.copy(state.camera.quaternion);
+      // Move the text outward towards the camera so it rests perfectly on the sphere's surface
+      textRef.current.translateZ(scale + 0.1);
+    }
+
+    if (!isActive) return;
+
     delta = Math.min(0.1, delta);
     const impulse = vec
       .copy(api.current.translation())
       .normalize()
       .multiply(
-        new THREE.Vector3(
-          -50 * delta * scale,
-          -150 * delta * scale,
-          -50 * delta * scale
-        )
+        new THREE.Vector3(-15 * delta * scale, -45 * delta * scale, -15 * delta * scale)
       );
     api.current.applyImpulse(impulse, true);
   });
 
   return (
-    <RigidBody
-      linearDamping={0.75}
-      angularDamping={0.15}
-      friction={0.2}
-      position={[r(20), r(20) - 25, r(20) - 10]}
-      ref={api}
-      colliders={false}
-    >
-      <BallCollider args={[scale]} />
-      <CylinderCollider
-        rotation={[Math.PI / 2, 0, 0]}
-        position={[0, 0, 1.2 * scale]}
-        args={[0.15 * scale, 0.275 * scale]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        scale={scale}
-        geometry={sphereGeometry}
-        material={material}
-      />
-    </RigidBody>
+    <group>
+      <RigidBody
+        linearDamping={1.5}
+        angularDamping={0.8}
+        friction={0.2}
+        position={[r(20), r(20) - 25, r(20) - 10]}
+        ref={api}
+        colliders={false}
+      >
+        <BallCollider args={[scale]} />
+        <CylinderCollider
+          rotation={[Math.PI / 2, 0, 0]}
+          position={[0, 0, 1.2 * scale]}
+          args={[0.15 * scale, 0.275 * scale]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          scale={scale}
+          geometry={sphereGeometry}
+          material={material}
+        />
+      </RigidBody>
+      <Text
+        ref={textRef}
+        fontSize={scale / 3.2}
+        color="white"
+        anchorX="center"
+        anchorY="middle"
+        outlineWidth={0.04}
+        outlineColor="#2e0080"
+      >
+        {skill}
+      </Text>
+    </group>
   );
 }
 
@@ -175,6 +200,7 @@ const TechStack = () => {
                   {...props}
                   material={materials[skillIndex]}
                   isActive={isActive}
+                  skill={skills[skillIndex]}
                 />
               </group>
             );

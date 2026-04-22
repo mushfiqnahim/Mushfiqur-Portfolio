@@ -1,0 +1,55 @@
+.avatar-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+  /* Allows clicking through the empty space around him */
+}
+
+.avatar-image {
+  width: 85%;
+  height: auto;
+  border-radius: 20px;
+  z-index: 5;
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+  /* Neon blue glow */
+  border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+/* Cyberpunk decorative rings */
+.tech-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 29, 255, 0.4);
+  /* Neon magenta */
+  z-index: 1;
+}
+
+.ring-inner {
+  width: 100%;
+  height: 100%;
+  border: 2px dashed rgba(0, 229, 255, 0.5);
+  /* Neon blue */
+}
+
+.ring-outer {
+  width: 115%;
+  height: 115%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top-color: rgba(255, 29, 255, 0.8);
+  border-bottom-color: rgba(0, 229, 255, 0.8);
+}
+
+/* Media Query for Mobile Responsiveness */
+@media screen and (max-width: 1024px) {
+  .avatar-container {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    margin: 2rem auto;
+  }
+}
